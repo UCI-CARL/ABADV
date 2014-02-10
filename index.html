@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Allen Brain Atlas-Driven Visualizations</title>
+<link rel="stylesheet" href="stylesheets/main.css?r=32" />
+</head>
+
+<div id="content">
+    <div id="banner">
+        <div id="top_left_menu">
+            <a href="index.html">Allen Brain Atlas-Driven Visualizations</a>
+        </div>
+        <div id="top_right_menu">
+            <a href="http://www.socsci.uci.edu/~jkrichma/CARL/">Cognitive Anteater Robotics Lab</a> ‧ 
+            <a href="http://andrewzaldivar.com">Personal Webpage</a> ‧ 
+            <a href="https://github.com/uci-carl">GitHub</a>
+        </div> <!-- END BANNER -->
+        <div style="clear:both"></div>
+    </div>
+    
+    <div id="main_column" style="float:left;width:600px">
+        <h1 class="tour_heading">About Allen Brain Atlas-Driven Visualizations</h1>
+        <p>Welcome to Allen Brain Atlas-Driven Visualizations (ABADV), a web-based application created for visualizing expression energy data from the <a href="http://brain-map.org">Allen Brain Atlas</a> (ABA).
+        <p>ABADV combines the <a href="http://api.brain-map.org">ABA Application Programming Interface (API</a>), a resource enabling programmatic access to their dataset, with <a href="http://d3js.org/">Data-Driven Documents (D3)</a>, a library that uses digital data to drive the creation and control of dynamic and interactive visualizations.</p>
+        <h2 class="tour_heading">How to Use ABADV</h2>
+        <p>Start by picking any of the available visualizations on the right column of this page. You will then be forwarded to a page that looks nearly identical to this thumbnail below:</p>
+        <a href="images/example.png"><img border="1" src="images/example.png" alt="Example" width="600"></a>
+        <p>Of course, on the visualization page, the main column will not be filled with any charts yet. You will have to first provide some genes and brain structures.</p>
+        <p>Currently, ABADV accepts only gene symbols and brain structure acronyms. Symbols used to query genes in the Allen Mouse Brain Atlas follow the same guidelines established by the International Committee on Standardized Genetic Nomenclature for Mice, which you can find at <a href="http://www.informatics.jax.org/genes.shtml">Mouse Genome Informatics</a>. Acronyms used to query brain structures in the Allen Mouse Brain Atlas are based on the <a href="http://atlas.brain-map.org">Allen Reference Atlas</a>.</p>
+        <p>After you type in a few genes and brain structures, pick any color scheme you want try and click the "Visualize!" button. You should now see a chart in the main column. From there, you can enter a new query and select a different color scheme, or you can return to the main page and try out another visualization.</p>
+        <p>ABADV was developed on Google Chrome. IE/Firefox users should wait for a future update.</p>
+    </div>
+    
+    <div id="right_column" style="float:left;border:0px solid red;width:300px;margin-left:4em;text-align:left">
+        <h1 class="tour_heading">Available Visualizations</h1>
+        <p><a href="visualizations/pie.html">Pie Chart</a></p>
+        <a href="visualizations/pie.html"><img border="0" src="images/pie.png" alt="Pie Chart" width="200"></a>
+        <p><a href="visualizations/heatmap.html">Heatmap</a></p>
+        <a href="visualizations/heatmap.html"><img border="0" src="images/heat.png" alt="Heatmap" width="200"></a>
+        <p><a href="visualizations/bar.html">Bar Chart</a></p>
+        <a href="visualizations/bar.html"><img border="0" src="images/bar.png" alt="Bar Chart" width="200"></a>
+            </div>
+</div>
