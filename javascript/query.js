@@ -75,9 +75,7 @@ function obtainIds(genes, structures, callback) {
 
             var e = data[l];
             var str = e.section_data_set_id.toString();
-
             var genestr = symbol + "-" + str.substring(0,3);
-
             expmList.push(genestr);
 
             if (currExpm != genestr) {
@@ -88,7 +86,7 @@ function obtainIds(genes, structures, callback) {
             output.push({'symbol': genestr,
                 'structure': e.structure.acronym,
                 'expression': e.expression_energy,
-                'sectionid': str,
+                'sectionid': genestr,
                 'column': column,
                 'row': row});
 
