@@ -3,7 +3,7 @@ Allen Brain Atlas-Driven Visualizations
 
 Allen Brain Atlas-Driven Visualizations (ABADV) is a web-based application created for visualizing expression energy data from the <a href="http://brain-map.org">Allen Brain Atlas</a>. ABADV combines the <a href="http://api.brain-map.org">ABA Application Programming Interface (API</a>), a resource enabling programmatic access to their dataset, with <a href="http://d3js.org/">Data-Driven Documents (D3)</a>, a library that uses digital data to drive the creation and control of dynamic and interactive visualizations. This allows users to quickly and intutiively survey expression energy data across multiple brain regions.
 
-If you download all the files or fork this project, and you want to run ABADV, then open index.html in Google Chrome. You will see a page that looks nearly identical to this thumbnail below:
+If you download all the files or fork this project (there is a Download ZIP button on the right column of this page), and you want to run ABADV, then open index.html in Google Chrome. You will see a page that looks nearly identical to this thumbnail below:
 
 ![example.png](https://raw2.github.com/UCI-CARL/ABADV/master/images/example.png)
 
