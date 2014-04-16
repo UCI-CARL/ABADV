@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Allen Brain Atlas-Driven Visualizations</title>
+
+<link rel="stylesheet" href="main.css?r=32" />
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="abadv.js"></script>
+<script type="text/javascript" src="query.js"></script>
+</head>
+
+<div id="content">
+    <div id="banner">
+        <div id="top_left_menu">
+            <a href="index.html">Allen Brain Atlas-Driven Visualizations</a>
+        </div>
+        <div id="top_right_menu">
+            <a href="http://www.socsci.uci.edu/~jkrichma/CARL/">Cognitive Anteater Robotics Lab</a> ‧ 
+            <a href="http://andrewzaldivar.com">Personal Webpage</a> ‧ 
+            <a href="http://github.com/UCI-CARL/ABADV">GitHub</a>
+        </div> <!-- END BANNER -->
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="main_column" style="float:left;width:600px">
+            <div id="debugDiv"></div>
+            <div id="bar"></div>
+            <div id="heatmap"></div>
+            <div id="pie"></div>
+    </div>
+
+    <div id="right_column" style="float:left;border:0px solid red;width:300px;margin-left:4em;text-align:left">
+        <div id="input" style="margin-top:30px;">
+            <form>
+                <table width="380" border=0>
+                    <tr><td width="99">Genes (Symbol)</td>
+                        <td><input name="genes" id="genes" type="text" size="40" placeholder="Drd1a, Drd2, Htr1a, Htr2c..."/></td>
+                    </tr>
+                    <tr><td>Brain Structures (Acronym)</td>
+                        <td><input name="brainstruct" id="brainstruct" type="text" size ="40" placeholder="VTA, ACB, CTX, sAMY, LS, HIP..."/></td>
+                    </tr>
+                    <tr><td></td>
+                        <td>Don't know the Allen Mouse Brain Atlas nomenclature? View their full list of <a href="mouseontology.html">brain structures</a>.</td>
+                    </tr>
+                    <tr>
+                        <td>Color Scheme</td>
+                        <td><input type="radio" name="colorscheme" id="atlas" value="atlas" checked>Atlas
+                            <input type="radio" name="colorscheme" id="default" value="default">Default
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Probe</td>
+                         <td><input type="radio" name="orientation" id="antisense" value="antisense" checked>Antisense
+                             <input type="radio" name="orientation" id="sense" value="sense">Sense
+                             <input type="radio" name="orientation" id="orientBoth" value="both">Both
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Section</td>
+                         <td><input type="radio" name="reference" id="coronal" value="coronal">Coronal
+                             <input type="radio" name="reference" id="sagittal" value="sagittal" checked>Sagittal
+                             <input type="radio" name="reference" id="refBoth" value="both">Both
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Visualization</td>
+                         <td><input type="radio" name="visual" id="pieVis" value="pieVis">Pie
+                             <input type="radio" name="visual" id="barVis" value="barVis">Bar
+                             <input type="radio" name="visual" id="heatVis" value="heatVis">Heatmap
+                             <input type="radio" name="visual" id="allVis" value="allVis" checked>All
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" id="visualize" value="Visualize!" onclick="obtainData()"/></td>
+                    </tr>
+                    <tr><td><div id="legendLabel"></div></td><td><div id="scaleLabel"></div></td></tr>
+                    <tr><td><div id="legend"></div></td><td><div id="heatscale"></div></td></tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>

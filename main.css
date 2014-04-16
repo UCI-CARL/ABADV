@@ -9,20 +9,20 @@ body
   overflow: scroll;
 }
 
-#chart {
+#bar, #chart, #heatmap {
   overflow-x: scroll;
   overflow-y: scroll;
   padding-bottom: 15px;
   max-width: 100%;
 }
 
-#chart canvas, #chart svg {
+#bar canvas, #bar svg, #chart canvas, #chart svg, #heatmap canvas, #heatmap svg {
   position: relative;
   top: 0;
   left: 0;
 }
 
-#chart {
+#bar, #chart, #heatmap {
   position: relative;
 }
 
@@ -44,17 +44,15 @@ body
 }
 
 
-#content
-{
+#content {
     width:1050px;
     margin-left:auto;
     margin-right:auto 
 }
 
-p  { margin-top:2px;margin-bottom:12px }
+p { margin-top:2px;margin-bottom:12px }
 
-#banner
-{
+#banner {
   background:white;
   color:black;
   border-bottom:1px dotted #aaa;
@@ -68,22 +66,19 @@ p  { margin-top:2px;margin-bottom:12px }
 #banner a.admin { color:#e00 }
 #banner a.banner_username { color:blue; }
 
-#top_left_menu
-{
+#top_left_menu {
     margin-top:2px;
     float:left;
 }
 #top_left_menu a { color:blue }
 
-#top_right_menu
-{
+#top_right_menu {
     margin-top:2px;
     float:right;
 }
 #top_right_menu a { color:blue }
 
-#main_column
-{
+#main_column {
     width:700px;
     min-height:700px;
     text-align:left;
@@ -92,8 +87,7 @@ p  { margin-top:2px;margin-bottom:12px }
     #border:1px solid #fa8;
 }
 
-#right_column
-{
+#right_column {
     float:left;
     margin-left:10px;
     text-align:left;
@@ -103,6 +97,6 @@ p  { margin-top:2px;margin-bottom:12px }
 }
 
 rect.bordered {
-    stroke: #E6E6E6;
-    stroke-width:3px;
+    stroke: #FFFFFF;
+    stroke-width:2px;
 }
