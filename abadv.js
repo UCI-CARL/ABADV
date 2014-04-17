@@ -264,7 +264,7 @@ function visualizeHeatMaps(csvData, colors, expmList) {
         .style("fill", function(d) { return colorScale(d.Expression); });
 
     heatMap.append("title").text(function(d) { return d.Expression; });
-
+    
     // Define a legend.
     var legend = d3.select("#heatscale").append("svg")
         .attr("class","legend")

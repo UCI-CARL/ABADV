@@ -6,12 +6,11 @@ body
   font-family: helvetica, sans-serif;
   word-wrap:break-word;
   text-align:center;
-  overflow: scroll;
 }
 
 #bar, #chart, #heatmap {
-  overflow-x: scroll;
-  overflow-y: scroll;
+  overflow-x: auto;
+  overflow-y: auto;
   padding-bottom: 15px;
   max-width: 100%;
 }
@@ -27,8 +26,6 @@ body
 }
 
 #legend {
-  overflow-x: scroll;
-  overflow-y: scroll;
   padding-bottom: 1px;
   max-width: 100%;
 }
@@ -45,9 +42,9 @@ body
 
 
 #content {
-    width:1050px;
-    margin-left:auto;
-    margin-right:auto 
+  width:1050px;
+  margin-left:auto;
+  margin-right:auto 
 }
 
 p { margin-top:2px;margin-bottom:12px }
@@ -67,36 +64,36 @@ p { margin-top:2px;margin-bottom:12px }
 #banner a.banner_username { color:blue; }
 
 #top_left_menu {
-    margin-top:2px;
-    float:left;
+  margin-top:2px;
+  float:left;
 }
 #top_left_menu a { color:blue }
 
 #top_right_menu {
-    margin-top:2px;
-    float:right;
+  margin-top:2px;
+  float:right;
 }
 #top_right_menu a { color:blue }
 
 #main_column {
-    width:700px;
-    min-height:700px;
-    text-align:left;
-    float:left;
-    position:relative;
-    #border:1px solid #fa8;
+  width:700px;
+  min-height:700px;
+  text-align:left;
+  float:left;
+  position:relative;
+  #border:1px solid #fa8;
 }
 
 #right_column {
-    float:left;
-    margin-left:10px;
-    text-align:left;
-    width:330px;
-    height:1000px;
-    #border:1px solid #cfd;
+  float:left;
+  margin-left:10px;
+  text-align:left;
+  width:330px;
+  height:1000px;
+  #border:1px solid #cfd;
 }
 
 rect.bordered {
-    stroke: #FFFFFF;
-    stroke-width:2px;
+  stroke: #FFFFFF;
+  stroke-width:2px;
 }

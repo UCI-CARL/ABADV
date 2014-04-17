@@ -1,3 +1,4 @@
+// Display console messages to main column of ABADV.
 if (typeof console  != "undefined") 
     if (typeof console.log != 'undefined')
         console.olog = console.log;
