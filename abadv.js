@@ -1,4 +1,4 @@
-var abaLink = "http://mouse.brain-map.org/experiment/show/";
+var abaLink = "https://mouse.brain-map.org/experiment/show/";
 var legendCreated = false;
 
 function visualizeData(data, colors, expmList) {

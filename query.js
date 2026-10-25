@@ -27,10 +27,12 @@ function obtainData(genes, structures) {
 
     var filters = checkFilters();
 
-    window.genes = document.getElementById('genes').value.split(/[ ,]+/);
-    window.structures = document.getElementById('brainstruct').value.split(/[ ,]+/);
+    var genesVal = document.getElementById('genes').value.trim();
+    var structVal = document.getElementById('brainstruct').value.trim();
+    window.genes = genesVal ? genesVal.split(/[ ,]+/).filter(Boolean) : [];
+    window.structures = structVal ? structVal.split(/[ ,]+/).filter(Boolean) : [];
     
-    if (window.genes == "" || window.structures == "") {
+    if (window.genes.length === 0 || window.structures.length === 0) {
         $('#debugDiv').empty();
         var msg = 'Make sure you have both gene symbols and structures typed in ' +
             'the appropriate text fields and try again.';
@@ -42,12 +44,32 @@ function obtainData(genes, structures) {
 
         // For each gene, retrieve available section IDs.
         for (var i = 0; i < window.genes.length; i++) {
-            urlSectionId.push(generateSectionIdUrl(i, filters, ontologyId));
+            urlSectionId.push(generateSectionIdUrl(i, filters, ontologyId, 'acronym'));
         }
 
         $('#debugDiv').empty();
         console.log('Retrieving SectionDataSetId for each gene in query...');
-        apiQuery(urlSectionId, structureUnionize);
+        apiQuery(urlSectionId, function(data) {
+            // Fall back to original_symbol for genes whose nomenclature was updated in ABA (e.g., Drd1a -> Drd1)
+            var fallbackIndices = [];
+            var fallbackUrls = [];
+            for (var i = 0; i < data.length; i++) {
+                if (!data[i] || data[i].length === 0) {
+                    fallbackIndices.push(i);
+                    fallbackUrls.push(generateSectionIdUrl(i, filters, ontologyId, 'original_symbol'));
+                }
+            }
+            if (fallbackUrls.length > 0) {
+                apiQuery(fallbackUrls, function(fallbackData) {
+                    for (var j = 0; j < fallbackIndices.length; j++) {
+                        data[fallbackIndices[j]] = fallbackData[j];
+                    }
+                    structureUnionize(data);
+                });
+            } else {
+                structureUnionize(data);
+            }
+        });
     }
 }
 
@@ -70,28 +92,30 @@ function checkFilters() {
     return [orientId, refSpace];
 }
 
-function generateSectionIdUrl(index, filters, ontologyId) {
+function generateSectionIdUrl(index, filters, ontologyId, geneField) {
+    var field = geneField || 'acronym';
+    var geneCriterion = "genes[" + field + "$eq'" + window.genes[index] + "']";
 
     // Generate SectionDataSet query based on filters.
     if (orientId && refSpace)
         var urlSectionId = 'data/query.json' + '?criteria=model::SectionDataSet,' +
             'rma::criteria,products[id$eq' + ontologyId + '],' +
-            'genes[acronym$eq' + window.genes[index] + '],' +
+            geneCriterion + ',' +
             orientId + ',' + refSpace;
     else if (orientId && !refSpace)
         var urlSectionId = 'data/query.json' + '?criteria=model::SectionDataSet,' +
             'rma::criteria,products[id$eq' + ontologyId + '],' +
-            'genes[acronym$eq' + window.genes[index] + '],' +
+            geneCriterion + ',' +
             orientId;
     else if (!orientId && refSpace)
         var urlSectionId = 'data/query.json' + '?criteria=model::SectionDataSet,' +
             'rma::criteria,products[id$eq' + ontologyId + '],' +
-            'genes[acronym$eq' + window.genes[index] + '],' +
+            geneCriterion + ',' +
             refSpace;
     else
         var urlSectionId = 'data/query.json' + '?criteria=model::SectionDataSet,' +
             'rma::criteria,products[id$eq' + ontologyId + '],' +
-            'genes[acronym$eq' + window.genes[index] + ']';
+            geneCriterion;
 
     return urlSectionId;
 }
@@ -114,7 +138,7 @@ function structureUnionize(data) {
                 symbol.push(window.genes[i]);
                 structPath.push('data/query.json' + '?criteria=model::StructureUnionize,' +
                     'rma::criteria,structure[ontology_id$eq' + ontologyId + '],' +
-                    'structure[acronym$eq' + window.structures[k] + '],' +
+                    "structure[acronym$eq'" + window.structures[k] + "']," +
                     'section_data_set[id$eq' + data[i][j].id + '],' +
                     'rma::include,structure');
             }
@@ -199,9 +223,10 @@ function processResults(data) {
 // this function also takes care of appending all the results together.
 function apiQuery(pathList, onsuccess) {
 
-    var apiPath = 'http://api.brain-map.org/api/v2/';
+    var apiPath = 'https://api.brain-map.org/api/v2/';
     var calls = pathList.length;
     var apiResponses = [];
+    var hasError = false;
 
     for (var i = 0; i < pathList.length; i++) {
         apiPageQuery(i);
@@ -213,6 +238,16 @@ function apiQuery(pathList, onsuccess) {
 
         $.ajax(url, {
             success: function(response) {
+                if (hasError) return;
+                if (!response || !response.success || !Array.isArray(response.msg)) {
+                    hasError = true;
+                    $('#debugDiv').empty();
+                    var msg = 'Unable to resolve query. ' +
+                    'Please try again using ' +
+                    'different search terms.';
+                    console.log(msg);
+                    return;
+                }
                 apiResponses[index] = response.msg;
                 calls--;
                 if (calls == 0) {
@@ -220,6 +255,8 @@ function apiQuery(pathList, onsuccess) {
                 }
             },
             error: function(response) {
+                    if (hasError) return;
+                    hasError = true;
                     $('#debugDiv').empty();
                     var msg = 'Unable to resolve query. ' +
                     'Please try again using ' +
